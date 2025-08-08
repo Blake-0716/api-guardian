@@ -1,0 +1,13 @@
+# logs & env
+*.log
+.env
+
+# python
+__pycache__/
+*.pyc
+
+# node
+node_modules/
+
+# macOS
+.DS_Store
