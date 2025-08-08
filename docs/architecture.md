@@ -4,3 +4,5 @@ User --> [API Gateway (守衛亭)] --> Backend Service
              | 限流 (Rate limit)
              v
            日誌/監控（之後接儀表板）
+User -> [API Gateway] -> Backend
+(先用 API-Key，之後換 JWT；未來加限流與日誌)
