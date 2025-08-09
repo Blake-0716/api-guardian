@@ -1,13 +1,20 @@
 services:
   gateway:
-    image: nginx:alpine            # 當作「守衛亭」
+    image: nginx:alpine
     ports:
-      - "8080:8080"               # 對外開 8080
+      - "8080:8080"
     volumes:
-      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro  # 掛我們的設定檔
+      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - backend
+      - auth
 
   backend:
-    image: hashicorp/http-echo:1.0 # 超簡易的假後端
+    image: hashicorp/http-echo:1.0
     command: ["-listen", ":5678", "-text", "Hello from backend"]
+
+  auth:
+    build: ./services/auth
+    environment:
+      - JWT_SECRET=supersecret123
+    # (可選)想直接測 auth 也能開埠： - "5000:5000"
